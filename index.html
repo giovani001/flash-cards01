@@ -9,10 +9,15 @@
         body {
             background-color: #f0f8ff; /* Fundo suave que combina com os cards */
             color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; /* Altura mínima para centralizar verticalmente */
+            flex-direction: column;
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 2500px;
             text-align: center;
             background-color: rgba(255, 255, 255, 0.9); /* Fundo branco com leve transparência */
             padding: 20px;
@@ -21,10 +26,10 @@
         }
 
         .flashcard {
-            width: 60%; /* Largura reduzida */
-            height: 100px; /* Altura reduzida */
+            width: 90%; /* Largura reduzida */
+            height: 250px; /* Aumentando a altura dos cards */
             perspective: 1000px;
-            margin: 15px auto;
+            margin: 10px auto;
         }
 
         .flashcard-inner {
@@ -42,7 +47,7 @@
         .flashcard-front,
         .flashcard-back {
             position: absolute;
-            width: 100%;
+            width: 300%;
             height: 100%;
             backface-visibility: hidden;
             border: 1px solid #ccc;
@@ -50,7 +55,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 1em;
+            font-size: 1.5em; /* Aumentando o tamanho da fonte */
             background-color: #ffffff;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
@@ -64,9 +69,10 @@
 <body>
     <div class="container mt-5">
         <h1 class="mb-4">Flashcards Educacionais</h1>
+        <button id="colorChangeBtn" class="btn btn-primary mb-4">Alterar Cor dos Cards</button>
         <div class="row justify-content-center">
-            <!-- Coluna com 2 flashcards -->
             <div class="col-md-3">
+                <!-- Primeira coluna com flashcards -->
                 <div class="flashcard">
                     <div class="flashcard-inner">
                         <div class="flashcard-front">
@@ -89,80 +95,91 @@
                 </div>
             </div>
 
-            <!-- Coluna com o restante dos flashcards -->
-            <div class="col-md-9">
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="flashcard">
-                            <div class="flashcard-inner">
-                                <div class="flashcard-front">
-                                    <p>Qual é a capital da França?</p>
-                                </div>
-                                <div class="flashcard-back">
-                                    <p>Paris</p>
-                                </div>
-                            </div>
+            <div class="col-md-3">
+                <!-- Segunda coluna com flashcards -->
+                <div class="flashcard">
+                    <div class="flashcard-inner">
+                        <div class="flashcard-front">
+                            <p>Qual é a capital da França?</p>
                         </div>
-                        <div class="flashcard">
-                            <div class="flashcard-inner">
-                                <div class="flashcard-front">
-                                    <p>Qual é a maior montanha do mundo?</p>
-                                </div>
-                                <div class="flashcard-back">
-                                    <p>Monte Everest</p>
-                                </div>
-                            </div>
+                        <div class="flashcard-back">
+                            <p>Paris</p>
                         </div>
                     </div>
-
-                    <div class="col-md-4">
-                        <div class="flashcard">
-                            <div class="flashcard-inner">
-                                <div class="flashcard-front">
-                                    <p>Quem escreveu "Dom Casmurro"?</p>
-                                </div>
-                                <div class="flashcard-back">
-                                    <p>Machado de Assis</p>
-                                </div>
-                            </div>
+                </div>
+                <div class="flashcard">
+                    <div class="flashcard-inner">
+                        <div class="flashcard-front">
+                            <p>Qual é a maior montanha do mundo?</p>
                         </div>
-                        <div class="flashcard">
-                            <div class="flashcard-inner">
-                                <div class="flashcard-front">
-                                    <p>Qual é a língua mais falada do mundo?</p>
-                                </div>
-                                <div class="flashcard-back">
-                                    <p>Mandarim</p>
-                                </div>
-                            </div>
+                        <div class="flashcard-back">
+                            <p>Monte Everest</p>
                         </div>
                     </div>
+                </div>
+            </div>
 
-                    <div class="col-md-4">
-                        <div class="flashcard">
-                            <div class="flashcard-inner">
-                                <div class="flashcard-front">
-                                    <p>Qual é o maior oceano do mundo?</p>
-                                </div>
-                                <div class="flashcard-back">
-                                    <p>Oceano Pacífico</p>
-                                </div>
-                            </div>
+            <div class="col-md-3">
+                <!-- Terceira coluna com flashcards -->
+                <div class="flashcard">
+                    <div class="flashcard-inner">
+                        <div class="flashcard-front">
+                            <p>Quem escreveu "Dom Casmurro"?</p>
                         </div>
-                        <div class="flashcard">
-                            <div class="flashcard-inner">
-                                <div class="flashcard-front">
-                                    <p>Quantos continentes existem?</p>
-                                </div>
-                                <div class="flashcard-back">
-                                    <p>Sete</p>
-                                </div>
-                            </div>
+                        <div class="flashcard-back">
+                            <p>Machado de Assis</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="flashcard">
+                    <div class="flashcard-inner">
+                        <div class="flashcard-front">
+                            <p>Qual é a língua mais falada do mundo?</p>
+                        </div>
+                        <div class="flashcard-back">
+                            <p>Mandarim</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <!-- Quarta coluna com flashcards -->
+                <div class="flashcard">
+                    <div class="flashcard-inner">
+                        <div class="flashcard-front">
+                            <p>Qual é o maior oceano do mundo?</p>
+                        </div>
+                        <div class="flashcard-back">
+                            <p>Oceano Pacífico</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="flashcard">
+                    <div class="flashcard-inner">
+                        <div class="flashcard-front">
+                            <p>Quantos continentes existem?</p>
+                        </div>
+                        <div class="flashcard-back">
+                            <p>Sete</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <script>
+        const colors = ['#ffffff', '#e7f7ff', '#ffe4e1', '#e6e6fa', '#fffacd', '#ffe4b5'];
+        let index = 0;
+
+        document.getElementById('colorChangeBtn').onclick = function() {
+            const flashcards = document.querySelectorAll('.flashcard-back');
+            flashcards.forEach(card => {
+                card.style.backgroundColor = colors[index];
+            });
+            index = (index + 1) % colors.length;
+        };
+    </script>
 </body>
 </html>
