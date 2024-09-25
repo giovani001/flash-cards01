@@ -5,9 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flashcards Educacionais</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">
     <style>
         body {
-            background-color: #e0f7fa; /* Fundo suave em azul claro */
+            background: linear-gradient(270deg, #ffffff, #80deea, #ff4081, #ffd54f);
+            background-size: 400% 400%;
+            animation: gradientAnimation 10s ease infinite;
             color: #333;
             display: flex;
             justify-content: center;
@@ -16,20 +19,43 @@
             flex-direction: column;
         }
 
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
         .container {
             max-width: 1200px;
             text-align: center;
             background-color: rgba(255, 255, 255, 0.9);
-            padding: 20px; /* Menos padding */
-            border-radius: 15px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        h1 {
+            font-family: 'Roboto', sans-serif;
+            font-size: 3em;
+            font-weight: 700;
+            animation: colorChange 3s infinite;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        @keyframes colorChange {
+            0% { color: #009688; }
+            25% { color: #80deea; }
+            50% { color: #ff4081; }
+            75% { color: #ffd54f; }
+            100% { color: #009688; }
         }
 
         .flashcard {
-            width: 40vw;  /* Largura ajustada para 40% da tela */
-            height: 20vh; /* Altura ajustada para 20% da tela */
+            width: 100%;
+            max-width: 320px;
+            height: 220px;
             perspective: 1000px;
-            margin: 10px auto; /* Margem centralizada */
+            margin: 15px auto;
         }
 
         .flashcard-inner {
@@ -50,13 +76,14 @@
             width: 100%;
             height: 100%;
             backface-visibility: hidden;
-            border: 2px solid #009688; /* Borda colorida */
-            border-radius: 10px;
+            border: 2px solid #009688;
+            border-radius: 15px;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 1em; /* Tamanho da fonte reduzido */
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            font-size: 1.2em;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+            padding: 20px;
         }
 
         .flashcard-front {
@@ -65,28 +92,44 @@
 
         .flashcard-back {
             transform: rotateY(180deg);
-            background-color: #80deea; /* Cor de fundo da parte de trás do card */
+            background-color: #80deea;
         }
 
         .btn-custom {
-            background-color: #009688; /* Cor do botão */
+            background-color: #009688;
             color: white;
             border: none;
-            font-size: 1em; /* Tamanho do botão reduzido */
-            margin: 5px 0; /* Margem dos botões */
+            font-size: 1em;
+            margin: 10px 5px;
+            transition: background-color 0.3s ease, transform 0.2s;
+            border-radius: 5px;
+            padding: 12px 20px;
         }
 
         .btn-custom:hover {
-            background-color: #00796b; /* Cor do botão ao passar o mouse */
+            background-color: #00796b;
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5em;
+            }
+            .flashcard {
+                width: 90vw;
+                height: 180px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container mt-5">
         <h1 class="mb-4">Flashcards Educacionais</h1>
-        <button id="colorChangeBtn" class="btn btn-custom mb-2">Alterar Cor dos Cards</button>
-        <button id="bgChangeBtn" class="btn btn-custom mb-2">Alterar Cor do Fundo</button>
-        <button id="resetBtn" class="btn btn-custom mb-4">Resetar Cores</button>
+        <div class="mb-4">
+            <button id="colorChangeBtn" class="btn btn-custom">Alterar Cor dos Cards</button>
+            <button id="bgChangeBtn" class="btn btn-custom">Alterar Cor do Fundo</button>
+            <button id="resetBtn" class="btn btn-custom">Resetar Cores</button>
+        </div>
         <div class="row justify-content-center">
             <div class="col-md-3">
                 <div class="flashcard">
@@ -184,14 +227,14 @@
 
     <script>
         const colors = ['#ffffff', '#80deea', '#ffe4e1', '#e6e6fa', '#fffacd', '#ffe4b5'];
-        const bgColors = ['#e0f7fa', '#80deea', '#ffffff', '#ffe4e1', '#f0f8ff', '#fafafa'];
+        const bgColors = ['#ffffff', '#80deea', '#ffffff', '#ffe4e1', '#f0f8ff', '#fafafa'];
         let index = 0;
         let bgIndex = 0;
 
         document.getElementById('colorChangeBtn').onclick = function() {
             const flashcards = document.querySelectorAll('.flashcard-back');
             flashcards.forEach(card => {
-                card.style.transition = "background 0.5s ease"; // Transição suave
+                card.style.transition = "background 0.5s ease"; 
                 card.style.backgroundColor = colors[index];
             });
             index = (index + 1) % colors.length;
@@ -199,19 +242,8 @@
 
         document.getElementById('bgChangeBtn').onclick = function() {
             bgIndex = (bgIndex + 1) % bgColors.length;
-            document.body.style.transition = "background 0.5s ease"; // Transição suave
+            document.body.style.transition = "background 0.5s ease";
             document.body.style.background = bgColors[bgIndex];
         };
 
-        document.getElementById('resetBtn').onclick = function() {
-            index = 0;
-            bgIndex = 0;
-            const flashcards = document.querySelectorAll('.flashcard-back');
-            flashcards.forEach(card => {
-                card.style.backgroundColor = '#80deea'; // Reset para a cor padrão
-            });
-            document.body.style.background = '#e0f7fa'; // Reset para a cor padrão
-        };
-    </script>
-</body>
-</html>
+        document.getElementById('reset
