@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flashcards Educacionais</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #e0f7fa; /* Fundo suave em azul claro */
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            flex-direction: column;
+        }
+
+        .container {
+            max-width: 1200px;
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .flashcard {
+            width: 60vw;  /* Largura ajustada para 60% da tela */
+            height: 30vh; /* Altura ajustada para 30% da tela */
+            perspective: 1000px;
+            margin: 20px auto; /* Margem centralizada */
+        }
+
+        .flashcard-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+
+        .flashcard:hover .flashcard-inner {
+            transform: rotateY(180deg);
+        }
+
+        .flashcard-front,
+        .flashcard-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border: 2px solid #009688; /* Borda colorida */
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2em; /* Tamanho da fonte reduzido */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .flashcard-front {
+            background-color: #ffffff;
+        }
+
+        .flashcard-back {
+            transform: rotateY(180deg);
+            background-color: #80deea; /* Cor de fundo da parte de trás do card */
+        }
+
+        .btn-custom {
+            background-color: #009688; /* Cor do botão */
+            color: white;
+            border: none;
+            font-size: 1.2em; /* Tamanho do botão reduzido */
+        }
+
+        .btn-custom:hover {
+            background-color: #00796b; /* Cor do botão ao passar o mouse */
+        }
+
+        @media (max-width: 1200px) {
+            .flashcard {
+                height: 25vh; /* Altura em telas menores */
+            }
+        }
+
+        @media (max-width: 992px) {
+            .flashcard {
+                height: 20vh; /* Altura em telas menores */
+            }
+        }
+
+        @media (max-width: 768px) {
+            .flashcard {
+                height: 15vh; /* Altura em telas menores */
+            }
+        }
+
+        @media (max-width: 576px) {
+            .flashcard {
+                width: 80vw;  /* Largura total em telas muito pequenas */
+                height: 20vh; /* Altura ajustada para telas pequenas */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="mb-4">Flashcards Educacionais</h1>
+        <button id="colorChangeBtn" class="btn btn-custom mb-4">Alterar Cor dos Cards</button>
+        <div class="row justify-content-center">
+            <div class="col-md-3">
+                <div class="flashcard">
+                    <div class="flashcard-inner">
+                        <div class="flashcard-front">
+                            <p>Qual é a fórmula da água?</p>
+                        </div>
+                        <div class="flashcard-back">
+                            <p>H₂O</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="flashcard">
+                    <div class="flashcard-inner">
+                        <div class="flashcard-front">
+                            <p>Quem foi o primeiro presidente do Brasil?</p>
+                        </div>
+                        <div class="flashcard-back">
+                            <p>Deodoro da Fonseca</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="flashcard">
+                    <div class="flashcard-inner">
+                        <div class="flashcard-front">
+                            <p>Qual é a capital da França?</p>
+                        </div>
+                        <div class="flashcard-back">
+                            <p>Paris</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="flashcard">
+                    <div class="flashcard-inner">
+                        <div class="flashcard-front">
+                            <p>Qual é a maior montanha do mundo?</p>
+                        </div>
+                        <div class="flashcard-back">
+                            <p>Monte Everest</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="flashcard">
+                    <div class="flashcard-inner">
+                        <div class="flashcard-front">
+                            <p>Quem escreveu "Dom Casmurro"?</p>
+                        </div>
+                        <div class="flashcard-back">
+                            <p>Machado de Assis</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="flashcard">
+                    <div class="flashcard-inner">
+                        <div class="flashcard-front">
+                            <p>Qual é a língua mais falada do mundo?</p>
+                        </div>
+                        <div class="flashcard-back">
+                            <p>Mandarim</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="flashcard">
+                    <div class="flashcard-inner">
+                        <div class="flashcard-front">
+                            <p>Qual é o maior oceano do mundo?</p>
+                        </div>
+                        <div class="flashcard-back">
+                            <p>Oceano Pacífico</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="flashcard">
+                    <div class="flashcard-inner">
+                        <div class="flashcard-front">
+                            <p>Quantos continentes existem?</p>
+                        </div>
+                        <div class="flashcard-back">
+                            <p>Sete</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const colors = ['#ffffff', '#80deea', '#ffe4e1', '#e6e6fa', '#fffacd', '#ffe4b5'];
+        let index = 0;
+
+        document.getElementById('colorChangeBtn').onclick = function() {
+            const flashcards = document.querySelectorAll('.flashcard-back');
+            flashcards.forEach(card => {
+                card.style.backgroundColor = colors[index];
+            });
+            index = (index + 1) % colors.length;
+        };
+    </script>
+</body>
+</html>
