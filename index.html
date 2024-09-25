@@ -30,17 +30,26 @@
         .container {
             max-width: 1200px;
             text-align: center;
-            background-color: rgba(255, 255, 255, 0.9);
+            background-color: rgba(255, 255, 255, 0.95);
             padding: 40px;
             border-radius: 20px;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+            animation: float 3s ease-in-out infinite;
+            position: relative;
+            overflow: hidden;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
 
         h1 {
             font-family: 'Lobster', cursive;
             font-size: 3em;
             animation: colorChange 3s infinite;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
+            margin-bottom: 30px;
         }
 
         @keyframes colorChange {
@@ -63,7 +72,7 @@
             position: relative;
             width: 100%;
             height: 100%;
-            transition: transform 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            transition: transform 0.6s ease;
             transform-style: preserve-3d;
         }
 
@@ -106,6 +115,7 @@
             transition: background-color 0.3s ease, transform 0.2s;
             border-radius: 5px;
             padding: 12px 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
         .btn-custom:hover {
@@ -113,8 +123,22 @@
             transform: scale(1.05);
         }
 
-        .btn-custom i {
-            margin-right: 5px;
+        .question-mark {
+            position: absolute;
+            color: black;
+            font-size: 2em;
+            animation: appear 2s infinite alternate;
+        }
+
+        @keyframes appear {
+            0% {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         @media (max-width: 768px) {
@@ -130,7 +154,7 @@
 </head>
 <body>
     <div class="container mt-5">
-        <h1 class="mb-4">Flashcards Educacionais</h1>
+        <h1>Flashcards Educacionais</h1>
         <div class="mb-4">
             <button id="colorChangeBtn" class="btn btn-custom"><i class="fas fa-palette"></i> Alterar Cor dos Cards</button>
             <button id="bgChangeBtn" class="btn btn-custom"><i class="fas fa-paint-roller"></i> Alterar Cor do Fundo</button>
@@ -229,8 +253,45 @@
                 </div>
             </div>
         </div>
+        
+        <!-- Adicionando pontos de interrogação -->
+        <div class="question-mark" style="top: 20px; left: 20px;">?</div>
+        <div class="question-mark" style="top: 80px; left: 150px;">?</div>
+        <div class="question-mark" style="top: 150px; left: 300px;">?</div>
+        <div class="question-mark" style="top: 50px; right: 100px;">?</div>
+        <div class="question-mark" style="top: 200px; right: 50px;">?</div>
     </div>
 
     <script>
         const colors = ['#ffffff', '#80deea', '#ffe4e1', '#e6e6fa', '#fffacd', '#ffe4b5'];
-        const bgColors = ['#ffffff', '#80deea', '#ffffff', '#ffe4e1', '#
+        const bgColors = ['#ffffff', '#80deea', '#ffffff', '#ffe4e1', '#ffe4b5', '#ffe4b5'];
+        let index = 0;
+        let bgIndex = 0;
+
+        document.getElementById('colorChangeBtn').onclick = function() {
+            const flashcards = document.querySelectorAll('.flashcard-back');
+            flashcards.forEach(card => {
+                card.style.transition = "background 0.5s ease";
+                card.style.backgroundColor = colors[index];
+            });
+            index = (index + 1) % colors.length;
+        };
+
+        document.getElementById('bgChangeBtn').onclick = function() {
+            bgIndex = (bgIndex + 1) % bgColors.length;
+            document.body.style.transition = "background 0.5s ease";
+            document.body.style.background = bgColors[bgIndex];
+        };
+
+        document.getElementById('resetBtn').onclick = function() {
+            index = 0;
+            bgIndex = 0;
+            const flashcards = document.querySelectorAll('.flashcard-back');
+            flashcards.forEach(card => {
+                card.style.backgroundColor = '#80deea';
+            });
+            document.body.style.background = '#ffffff';
+        };
+    </script>
+</body>
+</html>
