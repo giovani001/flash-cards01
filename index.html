@@ -20,16 +20,16 @@
             max-width: 1200px;
             text-align: center;
             background-color: rgba(255, 255, 255, 0.9);
-            padding: 40px;
+            padding: 20px; /* Menos padding */
             border-radius: 15px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
         }
 
         .flashcard {
-            width: 60vw;  /* Largura ajustada para 60% da tela */
-            height: 30vh; /* Altura ajustada para 30% da tela */
+            width: 40vw;  /* Largura ajustada para 40% da tela */
+            height: 20vh; /* Altura ajustada para 20% da tela */
             perspective: 1000px;
-            margin: 20px auto; /* Margem centralizada */
+            margin: 10px auto; /* Margem centralizada */
         }
 
         .flashcard-inner {
@@ -55,7 +55,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 1.2em; /* Tamanho da fonte reduzido */
+            font-size: 1em; /* Tamanho da fonte reduzido */
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
 
@@ -72,43 +72,21 @@
             background-color: #009688; /* Cor do botão */
             color: white;
             border: none;
-            font-size: 1.2em; /* Tamanho do botão reduzido */
+            font-size: 1em; /* Tamanho do botão reduzido */
+            margin: 5px 0; /* Margem dos botões */
         }
 
         .btn-custom:hover {
             background-color: #00796b; /* Cor do botão ao passar o mouse */
-        }
-
-        @media (max-width: 1200px) {
-            .flashcard {
-                height: 25vh; /* Altura em telas menores */
-            }
-        }
-
-        @media (max-width: 992px) {
-            .flashcard {
-                height: 20vh; /* Altura em telas menores */
-            }
-        }
-
-        @media (max-width: 768px) {
-            .flashcard {
-                height: 15vh; /* Altura em telas menores */
-            }
-        }
-
-        @media (max-width: 576px) {
-            .flashcard {
-                width: 80vw;  /* Largura total em telas muito pequenas */
-                height: 20vh; /* Altura ajustada para telas pequenas */
-            }
         }
     </style>
 </head>
 <body>
     <div class="container mt-5">
         <h1 class="mb-4">Flashcards Educacionais</h1>
-        <button id="colorChangeBtn" class="btn btn-custom mb-4">Alterar Cor dos Cards</button>
+        <button id="colorChangeBtn" class="btn btn-custom mb-2">Alterar Cor dos Cards</button>
+        <button id="bgChangeBtn" class="btn btn-custom mb-2">Alterar Cor do Fundo</button>
+        <button id="resetBtn" class="btn btn-custom mb-4">Resetar Cores</button>
         <div class="row justify-content-center">
             <div class="col-md-3">
                 <div class="flashcard">
@@ -206,14 +184,33 @@
 
     <script>
         const colors = ['#ffffff', '#80deea', '#ffe4e1', '#e6e6fa', '#fffacd', '#ffe4b5'];
+        const bgColors = ['#e0f7fa', '#80deea', '#ffffff', '#ffe4e1', '#f0f8ff', '#fafafa'];
         let index = 0;
+        let bgIndex = 0;
 
         document.getElementById('colorChangeBtn').onclick = function() {
             const flashcards = document.querySelectorAll('.flashcard-back');
             flashcards.forEach(card => {
+                card.style.transition = "background 0.5s ease"; // Transição suave
                 card.style.backgroundColor = colors[index];
             });
             index = (index + 1) % colors.length;
+        };
+
+        document.getElementById('bgChangeBtn').onclick = function() {
+            bgIndex = (bgIndex + 1) % bgColors.length;
+            document.body.style.transition = "background 0.5s ease"; // Transição suave
+            document.body.style.background = bgColors[bgIndex];
+        };
+
+        document.getElementById('resetBtn').onclick = function() {
+            index = 0;
+            bgIndex = 0;
+            const flashcards = document.querySelectorAll('.flashcard-back');
+            flashcards.forEach(card => {
+                card.style.backgroundColor = '#80deea'; // Reset para a cor padrão
+            });
+            document.body.style.background = '#e0f7fa'; // Reset para a cor padrão
         };
     </script>
 </body>
